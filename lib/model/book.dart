@@ -1,27 +1,53 @@
-class Book {
-  final int id;
+import 'package:flutter/material.dart';
+
+class Word {
   final String title;
-  final String author;
-  final String urlImage;
+  final String postag;
+  final String definition;
 
-  const Book({
-    required this.id,
-    required this.author,
+  const Word({
     required this.title,
-    required this.urlImage,
+    required this.postag,
+    required this.definition,
   });
-
-  factory Book.fromJson(Map<String, dynamic> json) => Book(
-        id: json['id'],
-        author: json['author'],
+  factory Word.fromJson(Map<String, dynamic> json) => Word(
         title: json['title'],
-        urlImage: json['urlImage'],
+        postag: json['postag'],
+        definition: json['definition'],
       );
 
   Map<String, dynamic> toJson() => {
-        'id': id,
         'title': title,
-        'author': author,
-        'urlImage': urlImage,
+        'postag': postag,
+        'definition': definition,
       };
+}
+
+//building the word view
+class WordDetail extends StatelessWidget {
+  final Word word;
+
+  const WordDetail({Key? key, required this.word}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Results'),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                word.title,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              ),
+              Text(word.postag),
+              Text(word.definition),
+            ],
+          ),
+        ));
+  }
 }

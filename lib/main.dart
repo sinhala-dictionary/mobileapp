@@ -14,13 +14,13 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
-  static final String title = 'Filter & Search ListView';
+  static final String title = 'Advanced Interactive Sinhala Dictionary';
 
   @override
   Widget build(BuildContext context) => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: title,
-        theme: ThemeData(primarySwatch: Colors.blue),
+        theme: ThemeData(primarySwatch: Colors.amber),
         home: MainPage(),
       );
 }
@@ -49,12 +49,16 @@ class _MainPageState extends State<MainPage> {
       currentIndex: index,
       items: [
         BottomNavigationBarItem(
-          icon: Text('Filter List', style: style),
-          title: Text('Local'),
+          icon: Text('History', style: style),
+          title: Text(''),
         ),
         BottomNavigationBarItem(
-          icon: Text('Filter List', style: style),
-          title: Text('Network'),
+          icon: Text('Home', style: style),
+          title: Text(''),
+        ),
+        BottomNavigationBarItem(
+          icon: Text('Saved', style: style),
+          title: Text(''),
         ),
       ],
       onTap: (int index) => setState(() => this.index = index),

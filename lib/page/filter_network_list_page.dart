@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:filter_listview_example/api/books_api.dart';
+// import 'package:filter_listview_example/api/books_api.dart';
 import 'package:filter_listview_example/main.dart';
 import 'package:filter_listview_example/model/book.dart';
 import 'package:filter_listview_example/widget/search_widget.dart';
@@ -12,7 +12,7 @@ class FilterNetworkListPage extends StatefulWidget {
 }
 
 class FilterNetworkListPageState extends State<FilterNetworkListPage> {
-  List<Book> books = [];
+  List<Word> books = [];
   String query = '';
   Timer? debouncer;
 
@@ -41,7 +41,7 @@ class FilterNetworkListPageState extends State<FilterNetworkListPage> {
   }
 
   Future init() async {
-    final books = await BooksApi.getBooks(query);
+    // final books = await BooksApi.getBooks(query);
 
     setState(() => this.books = books);
   }
@@ -76,7 +76,7 @@ class FilterNetworkListPageState extends State<FilterNetworkListPage> {
       );
 
   Future searchBook(String query) async => debounce(() async {
-        final books = await BooksApi.getBooks(query);
+        // final books = await BooksApi.getBooks(query);
 
         if (!mounted) return;
 
@@ -86,14 +86,14 @@ class FilterNetworkListPageState extends State<FilterNetworkListPage> {
         });
       });
 
-  Widget buildBook(Book book) => ListTile(
-        leading: Image.network(
-          book.urlImage,
-          fit: BoxFit.cover,
-          width: 50,
-          height: 50,
-        ),
+  Widget buildBook(Word book) => ListTile(
+        // leading: Image.network(
+        //   book.urlImage,
+        //   fit: BoxFit.cover,
+        //   width: 50,
+        //   height: 50,
+        // ),
         title: Text(book.title),
-        subtitle: Text(book.author),
+        // subtitle: Text(book.author),
       );
 }

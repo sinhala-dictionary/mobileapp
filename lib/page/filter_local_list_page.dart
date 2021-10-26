@@ -10,14 +10,14 @@ class FilterLocalListPage extends StatefulWidget {
 }
 
 class FilterLocalListPageState extends State<FilterLocalListPage> {
-  late List<Book> books;
+  late List<Word> wordslst;
   String query = '';
 
   @override
   void initState() {
     super.initState();
 
-    books = allBooks;
+    wordslst = allwords;
   }
 
   @override
@@ -31,11 +31,11 @@ class FilterLocalListPageState extends State<FilterLocalListPage> {
             buildSearch(),
             Expanded(
               child: ListView.builder(
-                itemCount: books.length,
+                itemCount: wordslst.length,
                 itemBuilder: (context, index) {
-                  final book = books[index];
+                  final book = wordslst[index];
 
-                  return buildBook(book);
+                  return buildWord(book, index);
                 },
               ),
             ),
@@ -45,34 +45,32 @@ class FilterLocalListPageState extends State<FilterLocalListPage> {
 
   Widget buildSearch() => SearchWidget(
         text: query,
-        hintText: 'Title or Author Name',
+        hintText: 'Search Word',
         onChanged: searchBook,
       );
 
-  Widget buildBook(Book book) => ListTile(
-        leading: Image.network(
-          book.urlImage,
-          fit: BoxFit.cover,
-          width: 50,
-          height: 50,
-        ),
-        title: Text(book.title),
-        subtitle: Text(book.author),
-      );
+  Widget buildWord(Word book, int x) => ListTile(
+      title: Text(book.title),
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => WordDetail(
+                  word: wordslst[x],
+                )));
+      });
 
   void searchBook(String query) {
-    final books = allBooks.where((book) {
+    final wordslst = allwords.where((book) {
       final titleLower = book.title.toLowerCase();
-      final authorLower = book.author.toLowerCase();
+      // final authorLower = book.author.toLowerCase();
       final searchLower = query.toLowerCase();
 
-      return titleLower.contains(searchLower) ||
-          authorLower.contains(searchLower);
+      return titleLower.contains(searchLower);
+      // authorLower.contains(searchLower);
     }).toList();
 
     setState(() {
       this.query = query;
-      this.books = books;
+      this.wordslst = wordslst;
     });
   }
 }
